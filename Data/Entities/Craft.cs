@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace AAF.Data.Entities
 {
-    public class Craft
+    public class Craft 
     {
         public int Id { get; set; }
 
@@ -14,7 +15,6 @@ namespace AAF.Data.Entities
         [Display(Name = "imagem da frente")]
         public string ImageBack { get; set; }
 
-
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
         public decimal Price { get; set; }
 
@@ -23,5 +23,6 @@ namespace AAF.Data.Entities
 
         [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = false)]
         public double Stock { get; set; }
-    }
+
+        }
 }
