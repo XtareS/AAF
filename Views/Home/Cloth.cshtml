@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewData["Title"] = "Gestor de productos";
+}
+
+
+
+<br><br><br><br><br><br><br>
+<div class="container-fluid">
+
+    <div class="container card-holder d-flex m-auto row">
+
+        <br>
+
+        <div class="Card fst mt-3 col-md-6">
+            <div class="row ">
+                <br>
+              
+                    <button class="btn modal-button m-auto col-8 ">
+                        <a class="nav-link" asp-controller="Texteis" asp-action="Create" data-text="Criar Novo Artigo"> Novo Textil </a>
+                    </button>
+
+                <br>
+               
+                    <button class="btn modal-button m-auto col-8 ">
+                        <a class="nav-link" asp-controller="Crafts" asp-action="Create" data-text="Criar Novo Artigo"> Novo ArtsCrafter </a>
+                    </button>
+              
+                <br>
+               
+                    <button class="btn modal-button m-auto col-8 ">
+                        <a class="nav-link" asp-controller="Ringers" asp-action="Create" data-text="Criar Novo Artigo"> Novo acessório </a>
+                    </button>
+               
+                <br>
+
+            </div>
+
+         </div>
+
+         <br>
+
+    </div>
+
+</div>
+
+
+<br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+@section Scripts{
+    <script type="text/javascript">
+        document.querySelector('#GT').className = 'active';
+    </script>
+}

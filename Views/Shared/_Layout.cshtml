@@ -1,0 +1,340 @@
+﻿<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> AAF | @ViewData["Title"]</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <link rel="icon" href="~/images/tab_icon_Browser_negat.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+
+
+        <nav class="navbar fixed-top  navbar-expand-sm main_Nav ">
+            <a class="navbar-brand " asp-controller="home" asp-action="index"><img src="~/images/logo_white.png" alt=""></a>
+            <a class="navbar-toggler d-lg-none" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+                <img class="navbar-toggler" src="~/images/logo_white.png">
+            </a>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav m-auto text-center mt-2 mt-lg-0">
+                    <li id="AB" class="nav-item ">
+                        <a class="nav-link" data-text="Sobre nós" asp-controller="Home" asp-action="AboutUs">AAF  </a>
+                    </li>
+                    <li id="CL" class="nav-item  ">
+                        <a class="nav-link" data-text="Ver a montra" asp-controller="Texteis" asp-action="Index">Textéis & Moda </a>
+                    </li>
+                    <li id="HD" class="nav-item ">
+                        <a class="nav-link" data-text="ver a oficina" asp-controller="Crafts" asp-action="Index">Arts & Crafts</a>
+                    </li>
+                    <li id="RG" class="nav-item ">
+                        <a class="nav-link" data-text="Ver o dispositor" asp-controller="Ringers" asp-action="Index">Acessórios </a>
+                    </li>
+                    <li id="Gt" class="nav-item ">
+                        <a class="nav-link" data-text="Criar Productos" asp-controller="Home" asp-action="Cloth">Gestor </a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+        <br>
+        <br>
+        <br>
+    </header>
+    <div class="container-fluid">
+
+        @RenderBody()
+
+    </div>
+    <br>
+    <br>
+    <br>
+    <footer class="navbar fixed-bottom navbar-expand-sm main_Nav ">
+
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav text-center  m-auto  mt-2 mt-lg-0">
+
+                <li class="nav-item ">
+                    <a class="nav-link" data-toggle="modal" data-target="#login" data-text="Login/Signup" href="#">Registar / Entrar </a>
+                </li>
+
+            </ul>
+        </div>
+        <div class=" text-center ">
+            <span class="nav-link" data-text="Copyright ©">
+                AAF <i class="fal fa-at"></i>
+                <script>
+                    document.write(new Date().getFullYear());
+                </script> All Rights Reserved
+            </span>
+        </div>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav text-center m-auto  mt-2 mt-lg-0">
+
+
+                <li id="PD" class="nav-item ">
+                    <a class="nav-link" data-text="RGPD" asp-controller="home" asp-action="Privacy">Privacidade</a>
+                </li>
+
+
+            </ul>
+        </div>
+    </footer>
+
+
+
+    <div class="modal fade" id="MoreKnoledDorind" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> AAF - a arte da familia </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h1> Dorinda </h1>
+                    <img src="https://scontent.flis5-3.fna.fbcdn.net/v/t1.18169-9/17264599_428755467467048_2874269171257407586_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=174925&_nc_ohc=4pkay9aX7oMAX-aycZE&_nc_ht=scontent.flis5-3.fna&oh=ef17e4f5730fb68a0bda9279410dfcc2&oe=616DF8E7">
+                    <br>
+
+                    <P> Nossa Costureira que faz todo o trabalho de costura com todo o rigor e bom gosto. Costureira Certificada e com Grande Sabedoria executa trabalhos também para fora, como arranjos de peças de vestuário. </P>
+                </div>
+                <br>
+
+                <div class=" text-center">
+                    <button type="button" class="btn modal-button ">
+                        <a class="nav-link" data-dismiss="modal">Close</a>
+                    </button>
+                </div>
+                <br>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="MoreKnoledFernanda" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> AAF - a arte da familia </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h1> Fernanda </h1>
+                    <img src="~/images/Fernanda.jpg">
+                    <br>
+
+                    <P> Com peças criadas na maioria pela própria, sempre com métedos artesanais, compõe peças de decoração onde coloca toda a sua imaginação </P>
+                </div>
+
+
+
+                <div class=" text-center">
+                    <button type="button" class="btn modal-button ">
+                        <a class="nav-link" data-dismiss="modal">Close</a>
+                    </button>
+                </div>
+                <br>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="MoreKnoledSara" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> AAF - a arte da familia </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h1> Sara </h1>
+                    <img src="~/images/Sara.jpg">
+                    <br>
+
+                    <P> Nossa Criadora da Oficina AartedaFamilia, Empenha as mais variadas funções em todos os nossos projectos, desde os mais simples aos mais complexos</P>
+                </div>
+                <br>
+
+                <div class=" text-center">
+                    <button type="button" class="btn modal-button ">
+                        <a class="nav-link" data-dismiss="modal">Close</a>
+                    </button>
+                </div>
+                <br>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="MoreKnoledTiago" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> AAF - a arte da familia </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h1> Tiago </h1>
+                    <img src="~/images/Tiago.jpg">
+                    <br>
+
+                    <P>
+                        O nosso Adminidtrador da página <a href="https://www.facebook.com/profile.php?id=100072704783998">A Arte da Familia</a> no facebook, e webdesigner do nosso site, também é o criador dos nossos desenhos, exclusivos , para pintura
+                        e aplicação nas peças.
+                    </P>
+                </div>
+                <br>
+
+                <div class=" text-center">
+                    <button type="button" class="btn modal-button ">
+                        <a class="nav-link" data-dismiss="modal">Close</a>
+                    </button>
+                </div>
+                <br>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="UrMission" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> AAF - A nossa missão </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Bem-vindos ao nosso site, onde o Amor pela Arte se uniu para criar Sonhos</p>
+                    <br>
+                    <br>
+                    <p>Somos um pequeno grupo Familiar, que juntou os seus sonhos e o amor pela arte, resolvendo assim, trazê-los ao mundo real.</p>
+                    <p> <strong>Criamos peças com exclusividade </strong>, na grande maioria das vezes <strong> concretizando todo o trabalho artesanalmente </strong>.</p>
+                    <p>Todas as peças são criadas de raiz, procurando a originalidade.</p>
+                    <br>
+                    <br>
+                    <p>
+                        Agradecendo a visita a este cantinho que é de todos nós, amantes do belo e admiradores do original, esperamos trazer os nossos, e vossos, sonhos de peças artesanais, têxteis e outras variadas formas de arte, ao nosso mundo e de encontro
+                        Aos Gostos pessoais e individuais.
+                    </p>
+                </div>
+                <br>
+
+                <div class=" text-center">
+                    <button type="button" class="btn modal-button ">
+                        <a class="nav-link" data-dismiss="modal">Close</a>
+                    </button>
+                </div>
+                <br>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="login" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Login</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                <i class="fa fa-envelope"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                <i class="fa fa-lock"></i>
+                            </span>
+                        </div>
+                        <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+                    </div>
+                    <button type="submit" name="commit" class="modal-button btn  btn-lg btn-block">
+                        <span data-text="Entrar no website" class="nav-link">Login <i class="fa fa-sign-in"></i></span>
+                    </button>
+                    <div class="text-center modal-button">
+                        <a data-text="Criar a minha conta" class="nav-link" data-dismiss="modal" data-toggle="modal" data-target="#signup">Signup</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="signup" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Signup</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                <i class="fa fa-user"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                <i class="fa fa-envelope"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                <i class="fa fa-lock"></i>
+                            </span>
+                        </div>
+                        <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                <i class="fa fa-lock"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Password confirmation" aria-label="Password confirmation" aria-describedby="basic-addon1">
+                    </div>
+                    <button type="submit" name="commit" class="btn modal-button btn-lg btn-block">
+                        <span data-text="Criar a minha conta" class="nav-link">Signup <i class="fa fa-sign-in"></i></span>
+                    </button>
+                    <div class="text-center modal-button">
+                        <a data-text="Entrar no website" class="nav-link" data-dismiss="modal" data-toggle="modal" data-target="#login">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
