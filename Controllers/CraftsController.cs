@@ -12,29 +12,28 @@ namespace AAF.Controllers
 {
     public class CraftsController : Controller
     {
-        private readonly IRepository repository;
+        public ICraftRepository CraftRepository { get; }
 
-        public CraftsController(IRepository repository)
+        public CraftsController(ICraftRepository CraftRepository)
         {
-          
-            this.repository = repository;
+            this.CraftRepository = CraftRepository;
         }
 
         // GET: Crafts
         public IActionResult Index()
         {
-            return View(this.repository.GetCrafts());
+            return View(this.CraftRepository.GetAll());
         }
 
         // GET: Crafts/Details/5
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var craft = this.repository.GetCraft(id.Value);
+            var craft = await this.CraftRepository.GetByIdAsync(id.Value);
             if (craft == null)
             {
                 return NotFound();
@@ -58,22 +57,21 @@ namespace AAF.Controllers
         {
             if (ModelState.IsValid)
             {
-                this.repository.AddCraft(craft);
-                await this.repository.SaveAllAsync();
+                await this.CraftRepository.CreateAsync(craft);
                 return RedirectToAction(nameof(Index));
             }
             return View(craft);
         }
 
         // GET: Crafts/Edit/5
-        public IActionResult Edit(int? id)
+        public async Task <IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var craft = this.repository.GetCraft(id.Value);
+            var craft = await this.CraftRepository.GetByIdAsync(id.Value);
             if (craft == null)
             {
                 return NotFound();
@@ -93,12 +91,11 @@ namespace AAF.Controllers
             {
                 try
                 {
-                    this.repository.UpdateCraft(craft);
-                    await this.repository.SaveAllAsync();
+                    await this.CraftRepository.UpdateAsync(craft);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!this.repository.CraftExists(craft.Id))
+                    if (!await this.CraftRepository.ExistsAsync(craft.Id))
                     {
                         return NotFound();
                     }
@@ -113,14 +110,14 @@ namespace AAF.Controllers
         }
 
         // GET: Crafts/Delete/5
-        public IActionResult Delete(int? id)
+        public async Task <IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var craft = this.repository.GetCraft(id.Value);
+            var craft = await this.CraftRepository.GetByIdAsync(id.Value);
             if (craft == null)
             {
                 return NotFound();
@@ -134,9 +131,8 @@ namespace AAF.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var craft = this.repository.GetCraft(id);
-            this.repository.RemoveCraft(craft);
-            await this.repository.SaveAllAsync();
+            var craft = await this.CraftRepository.GetByIdAsync(id);
+            await this.CraftRepository.DeleteAsync(craft);
             return RedirectToAction(nameof(Index));
         }
 

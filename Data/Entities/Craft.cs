@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AAF.Data.Entities
 {
-    public class Craft 
+    public class Craft :IEntity
     {
         public int Id { get; set; }
 

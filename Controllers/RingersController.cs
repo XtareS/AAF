@@ -12,30 +12,28 @@ namespace AAF.Controllers
 {
     public class RingersController : Controller
     {
-       
-        private readonly IRepository repository;
+        public IRingerRepository RingerRepository { get; }
 
-        public RingersController(IRepository repository)
+        public RingersController(IRingerRepository RingerRepository)
         {
-         
-            this.repository = repository;
+            this.RingerRepository = RingerRepository;
         }
 
         // GET: Ringers
         public IActionResult Index()
         {
-            return View(this.repository.GetRingers());
+            return View(this.RingerRepository.GetAll());
         }
 
         // GET: Ringers/Details/5
-        public IActionResult Details(int? id)
+        public async Task <IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var ringer = this.repository.GetRinger(id.Value);
+            var ringer = await this.RingerRepository.GetByIdAsync(id.Value);
             if (ringer == null)
             {
                 return NotFound();
@@ -59,22 +57,22 @@ namespace AAF.Controllers
         {
             if (ModelState.IsValid)
             {
-                this.repository.AddRinger(ringer);
-                await this.repository.SaveAllAsync();
+                await this.RingerRepository.CreateAsync(ringer);
+               
                 return RedirectToAction(nameof(Index));
             }
             return View(ringer);
         }
 
         // GET: Ringers/Edit/5
-        public IActionResult Edit(int? id)
+        public async Task <IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var ringer = this.repository.GetRinger(id.Value);
+            var ringer = await this.RingerRepository.GetByIdAsync(id.Value);
             if (ringer == null)
             {
                 return NotFound();
@@ -95,12 +93,12 @@ namespace AAF.Controllers
             {
                 try
                 {
-                    this.repository.UpdateRinger(ringer);
-                    await this.repository.SaveAllAsync();
+                    await this.RingerRepository.UpdateAsync(ringer);
+                   
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!this.repository.RingerExists(ringer.Id))
+                    if (!await this.RingerRepository.ExistsAsync(ringer.Id))
                     {
                         return NotFound();
                     }
@@ -115,14 +113,14 @@ namespace AAF.Controllers
         }
 
         // GET: Ringers/Delete/5
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var ringer = this.repository.GetRinger(id.Value);
+            var ringer = await this.RingerRepository.GetByIdAsync(id.Value);
             if (ringer == null)
             {
                 return NotFound();
@@ -136,9 +134,9 @@ namespace AAF.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var ringer = this.repository.GetRinger(id);
-            this.repository.RemoveRinger(ringer);
-            await this.repository.SaveAllAsync();
+            var ringer = await this.RingerRepository.GetByIdAsync(id);
+            await this.RingerRepository.DeleteAsync(ringer);
+            
             return RedirectToAction(nameof(Index));
         }
 

@@ -12,30 +12,28 @@ namespace AAF.Controllers
 {
     public class TexteisController : Controller
     {
-    
-        private readonly IRepository repository;
+        private readonly ITexteiRepository repository;
 
-        public TexteisController(IRepository repository)
+        public TexteisController(ITexteiRepository repository)
         {
-            
             this.repository = repository;
         }
 
         // GET: Texteis
         public IActionResult Index()
         {
-            return View(this.repository.GetTexteis());
+            return View(this.repository.GetAll());
         }
 
         // GET: Texteis/Details/5
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var textei = this.repository.GetTextei(id.Value);
+            var textei = await this.repository.GetByIdAsync(id.Value);
             if (textei == null)
             {
                 return NotFound();
@@ -59,22 +57,21 @@ namespace AAF.Controllers
         {
             if (ModelState.IsValid)
             {
-               this.repository.AddTextei(textei);
-                await this.repository.SaveAllAsync();
+              await this.repository.CreateAsync(textei);
                 return RedirectToAction(nameof(Index));
             }
             return View(textei);
         }
 
         // GET: Texteis/Edit/5
-        public IActionResult Edit(int? id)
+        public async Task <IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var textei = this.repository.GetTextei(id.Value);
+            var textei = await this.repository.GetByIdAsync(id.Value);
             if (textei == null)
             {
                 return NotFound();
@@ -94,12 +91,12 @@ namespace AAF.Controllers
             {
                 try
                 {
-                    this.repository.UpdateTextei(textei);
-                    await this.repository.SaveAllAsync();
+                  await this.repository.UpdateAsync(textei);
+                   
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!this.repository.TexteiExists(textei.Id))
+                    if (!await this.repository.ExistsAsync(textei.Id))
                     {
                         return NotFound();
                     }
@@ -114,15 +111,15 @@ namespace AAF.Controllers
         }
 
         // GET: Texteis/Delete/5
-        public IActionResult Delete(int? id)
+        public async Task <IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var textei = this.repository.GetTextei(id.Value);
-               
+            var textei = await this.repository.GetByIdAsync(id.Value);
+
             if (textei == null)
             {
                 return NotFound();
@@ -136,9 +133,9 @@ namespace AAF.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var textei = this.repository.GetTextei(id);
-            this.repository.RemoveTextei(textei);
-            await this.repository.SaveAllAsync();
+            var textei = await this.repository.GetByIdAsync(id);
+            await this.repository.DeleteAsync(textei);
+           
             return  RedirectToAction(nameof(Index));
         }
 

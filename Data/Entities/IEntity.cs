@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace AAF.Data.Entities
 {
-    public interface IEntitiesId
+    public interface IEntity
     {
         int Id { get; set; }
+
     }
 }

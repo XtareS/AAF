@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using AAF.Data.Entities;
 
 namespace AAF
 {
@@ -27,7 +28,9 @@ namespace AAF
                 cfg.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddScoped<IRepository, Repository>();
+            services.AddScoped<ITexteiRepository, TexteiRepository>();
+            services.AddScoped<ICraftRepository , CraftRepository >();
+            services.AddScoped<IRingerRepository, RingerRepository>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {

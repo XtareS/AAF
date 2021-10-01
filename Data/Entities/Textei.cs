@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AAF.Data.Entities
 {
-    public class Textei 
+    public class Textei:IEntity
     {
         public int Id { get; set; }
 

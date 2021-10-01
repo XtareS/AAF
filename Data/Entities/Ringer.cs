@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AAF.Data.Entities
 {
-    public class Ringer 
+    public class Ringer:IEntity
     {
         public int Id { get; set; }
 
