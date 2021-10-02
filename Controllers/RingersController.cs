@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using AAF.Data;
 using AAF.Data.Entities;
 using AAF.Helpers;
+using AAF.Models;
+using System.IO;
 
 namespace AAF.Controllers
 {
@@ -56,17 +58,64 @@ namespace AAF.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,ImageFront,ImageBack,Price,Disponivel,Stock")] Ringer ringer)
+        public async Task<IActionResult> Create([Bind("Id,Name,ImageFront,ImageBack,Price,Disponivel,Stock")] RingerViewModel view)
         {
             if (ModelState.IsValid)
             {
+                var pathFront = string.Empty;
+                var pathBack = string.Empty;
+
+                if (view.ImageFileFront != null && view.ImageFileFront.Length > 0)
+                {
+                    pathFront = Path.Combine(Directory.GetCurrentDirectory(),
+                        "wwwroot\\images\\Ringers\\front",
+                        view.ImageFileFront.FileName);
+                    using (var stream = new FileStream(pathFront, FileMode.Create))
+                    {
+                        await view.ImageFileFront.CopyToAsync(stream);
+                    }
+                    pathFront = $"~/images/Ringers/front/{view.ImageFileFront.FileName}";
+                }
+
+
+                if (view.ImageFileBack != null && view.ImageFileBack.Length > 0)
+                {
+                    pathBack = Path.Combine(Directory.GetCurrentDirectory(),
+                        "wwwroot\\images\\Ringers\\back",
+                        view.ImageFileBack.FileName);
+                    using (var stream = new FileStream(pathBack, FileMode.Create))
+                    {
+                        await view.ImageFileBack.CopyToAsync(stream);
+                    }
+                    pathBack = $"~/images/Ringers/back/{view.ImageFileBack.FileName}";
+                }
+
+                var ringer = this.ToRinger(view, pathFront, pathBack);
+
+
                 //TODO: Change For the Logged User
                 ringer.User = await this.userHelper.GetUserByEmailAsync("irma.mendonca.sr@gmail.com");
                 await this.RingerRepository.CreateAsync(ringer);
                
                 return RedirectToAction(nameof(Index));
             }
-            return View(ringer);
+            return View(view);
+        }
+
+        private Ringer ToRinger(RingerViewModel view, string pathFront, string pathBack)
+        {
+            return new Ringer
+            {
+                Id = view.Id,
+                Name = view.Name,
+                ImageFront = pathFront,
+                ImageBack = pathBack,
+                Price = view.Price,
+                Stock = view.Stock,
+                User = view.User
+
+
+            };
         }
 
         // GET: Ringers/Edit/5

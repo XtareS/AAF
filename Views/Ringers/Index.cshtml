@@ -14,26 +14,27 @@
     {
         <div class="card   ">
             <div class="card-title text-center">
-                <h1 class="title-content">
+                <br />
+                <h3 class="title-content">
                     @Html.DisplayFor(modelItem => item.Name)
-                </h1>
+                </h3>
             </div>
 
             <div class="fliper ">
 
                 <div class="flip-img">
 
-                    <div class="card-back">
+                    <div class="card-front">
                         @if (!string.IsNullOrEmpty(item.ImageFront))
                         {
                             <img src="@Url.Content(item.ImageFront)" alt="image" />
                         }
                     </div>
 
-                    <div class="card-front">
+                    <div class="card-back">
                         @if (!string.IsNullOrEmpty(item.ImageBack))
                         {
-                            <img src="@Url.Content(item.ImageBack)" alt="image" style="width:100px;height:150px;max-width:100%;height:auto;" />
+                            <img src="@Url.Content(item.ImageBack)" alt="image" />
                         }
                     </div>
 
@@ -72,3 +73,12 @@
     }
 
 </div>
+
+
+
+
+@section Scripts{
+    <script type="text/javascript">
+        document.querySelector('#RG').className = 'active';
+    </script>
+}

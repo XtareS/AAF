@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using AAF.Data;
 using AAF.Data.Entities;
 using AAF.Helpers;
+using AAF.Models;
+using System.IO;
 
 namespace AAF.Controllers
 {
@@ -56,16 +58,63 @@ namespace AAF.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,ImageFront,ImageBack,Price,Disponivel,Stock")] Craft craft)
+        public async Task<IActionResult> Create([Bind("Id,Name,ImageFileFront,ImageFileBack,Price,Disponivel,Stock")] CraftViewModel view)
         {
             if (ModelState.IsValid)
             {
+                var pathFront = string.Empty;
+                var pathBack = string.Empty;
+
+                if (view.ImageFileFront != null && view.ImageFileFront.Length > 0)
+                {
+                    pathFront = Path.Combine(Directory.GetCurrentDirectory(),
+                        "wwwroot\\images\\Crafts\\front",
+                        view.ImageFileFront.FileName);
+                    using (var stream = new FileStream(pathFront, FileMode.Create))
+                    {
+                        await view.ImageFileFront.CopyToAsync(stream);
+                    }
+                    pathFront = $"~/images/Crafts/front/{view.ImageFileFront.FileName}";
+                }
+
+
+                if (view.ImageFileBack != null && view.ImageFileBack.Length > 0)
+                {
+                    pathBack = Path.Combine(Directory.GetCurrentDirectory(),
+                        "wwwroot\\images\\Crafts\\back",
+                        view.ImageFileBack.FileName);
+                    using (var stream = new FileStream(pathBack, FileMode.Create))
+                    {
+                        await view.ImageFileBack.CopyToAsync(stream);
+                    }
+                    pathBack = $"~/images/Crafts/back/{view.ImageFileBack.FileName}";
+                }
+
+                var craft = this.ToCraft(view, pathFront, pathBack);
+
+
                 //TODO: Change For the Logged User
                 craft.User = await this.userHelper.GetUserByEmailAsync("irma.mendonca.sr@gmail.com");
                 await this.CraftRepository.CreateAsync(craft);
                 return RedirectToAction(nameof(Index));
             }
-            return View(craft);
+            return View(view);
+        }
+
+        private Craft ToCraft(CraftViewModel view, string pathFront, string pathBack)
+        {
+            return new Craft
+            {
+                Id = view.Id,
+                Name = view.Name,
+                ImageFront = pathFront,
+                ImageBack = pathBack,
+                Price = view.Price,
+                Stock = view.Stock,
+                User = view.User
+
+
+            };
         }
 
         // GET: Crafts/Edit/5

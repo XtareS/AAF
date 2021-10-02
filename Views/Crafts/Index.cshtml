@@ -13,62 +13,63 @@
 
     @foreach (var item in Model)
     {
-    <div class="card   ">
-        <div class="card-title text-center">
-            <h1 class="title-content">
-                @Html.DisplayFor(modelItem => item.Name)
-            </h1>
-        </div>
+        <div class="card   ">
+            <div class="card-title text-center">
+                <br />
+                <h3 class="title-content">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </h3>
+            </div>
 
-        <div class="fliper ">
+            <div class="fliper ">
 
-            <div class="flip-img">
+                <div class="flip-img">
 
-                <div class="card-back">
-                    @if (!string.IsNullOrEmpty(item.ImageFront))
-                    {
-                        <img src="@Url.Content(item.ImageFront)" alt="image" />
-                    }
-                </div>
+                    <div class="card-front">
+                        @if (!string.IsNullOrEmpty(item.ImageFront))
+                        {
+                            <img src="@Url.Content(item.ImageFront)" alt="image" />
+                        }
+                    </div>
 
-                <div class="card-front">
-                    @if (!string.IsNullOrEmpty(item.ImageBack))
-                    {
-                        <img src="@Url.Content(item.ImageBack)" alt="image" style="width:100px;height:150px;max-width:100%;height:auto;" />
-                    }
+                    <div class="card-back">
+                        @if (!string.IsNullOrEmpty(item.ImageBack))
+                        {
+                            <img src="@Url.Content(item.ImageBack)" alt="image" />
+                        }
+                    </div>
+
                 </div>
 
             </div>
 
-        </div>
 
+            <div class="text-center">
 
-        <div class="text-center">
+                <h2>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </h2>
 
-            <h2>
-                @Html.DisplayFor(modelItem => item.Price)
-            </h2>
-
-        </div>
+            </div>
 
 
 
-        <div class="card-footer text-center">
+            <div class="card-footer text-center">
 
-            <div class="footer-content">
-                <a data-text="Adicionar ao Carrinho" asp-route-id="@item.Id" class="nav-link "> Comprar este artigo </a>
+                <div class="footer-content">
+                    <a data-text="Adicionar ao Carrinho" asp-route-id="@item.Id" class="nav-link "> Comprar este artigo </a>
+                </div>
+
+            </div>
+
+            <div class="row mt-2 mb-3">
+                <a class=" text-center text-dark">@Html.DisplayFor(modelItem => item.Disponivel)</a>
+                <a class="btn btn-warning text-center text-dark ml-1" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a class="btn btn-info text-center text-dark ml-1 mr-1" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <a class="btn btn-danger text-center text-dark mr-1" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </div>
 
         </div>
-
-        <div class="row mt-2 mb-3">
-            <a class=" text-center text-dark">@Html.DisplayFor(modelItem => item.Disponivel)</a>
-            <a class="btn btn-warning text-center text-dark ml-1" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-            <a class="btn btn-info text-center text-dark ml-1 mr-1" asp-action="Details" asp-route-id="@item.Id">Details</a>
-            <a class="btn btn-danger text-center text-dark mr-1" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-        </div>
-
-    </div>
         <br /><br />
     }
 
@@ -76,3 +77,10 @@
 
 
 
+
+
+@section Scripts{
+    <script type="text/javascript">
+        document.querySelector('#HD').className = 'active';
+    </script>
+}
