@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AAF.Data;
 using AAF.Data.Entities;
+using AAF.Helpers;
 
 namespace AAF.Controllers
 {
     public class TexteisController : Controller
     {
         private readonly ITexteiRepository repository;
+        private readonly IUserHelper userHelper;
 
-        public TexteisController(ITexteiRepository repository)
+        public TexteisController(ITexteiRepository repository, IUserHelper userHelper)
         {
             this.repository = repository;
+            this.userHelper = userHelper;
         }
 
         // GET: Texteis
@@ -57,6 +60,8 @@ namespace AAF.Controllers
         {
             if (ModelState.IsValid)
             {
+                //TODO: Change For the Logged User
+                textei.User = await this.userHelper.GetUserByEmailAsync("irma.mendonca.sr@gmail.com");
               await this.repository.CreateAsync(textei);
                 return RedirectToAction(nameof(Index));
             }
@@ -91,7 +96,9 @@ namespace AAF.Controllers
             {
                 try
                 {
-                  await this.repository.UpdateAsync(textei);
+                    //TODO: Change For the Logged User
+                    textei.User = await this.userHelper.GetUserByEmailAsync("irma.mendonca.sr@gmail.com");
+                    await this.repository.UpdateAsync(textei);
                    
                 }
                 catch (DbUpdateConcurrencyException)

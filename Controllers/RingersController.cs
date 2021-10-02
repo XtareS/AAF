@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AAF.Data;
 using AAF.Data.Entities;
+using AAF.Helpers;
 
 namespace AAF.Controllers
 {
     public class RingersController : Controller
     {
-        public IRingerRepository RingerRepository { get; }
+        private readonly IRingerRepository RingerRepository;
+        private readonly IUserHelper userHelper;
 
-        public RingersController(IRingerRepository RingerRepository)
+        public RingersController(IRingerRepository RingerRepository, IUserHelper userHelper)
         {
             this.RingerRepository = RingerRepository;
+            this.userHelper = userHelper;
         }
 
         // GET: Ringers
@@ -57,6 +60,8 @@ namespace AAF.Controllers
         {
             if (ModelState.IsValid)
             {
+                //TODO: Change For the Logged User
+                ringer.User = await this.userHelper.GetUserByEmailAsync("irma.mendonca.sr@gmail.com");
                 await this.RingerRepository.CreateAsync(ringer);
                
                 return RedirectToAction(nameof(Index));
@@ -93,6 +98,8 @@ namespace AAF.Controllers
             {
                 try
                 {
+                    //TODO: Change For the Logged User
+                    ringer.User = await this.userHelper.GetUserByEmailAsync("irma.mendonca.sr@gmail.com");
                     await this.RingerRepository.UpdateAsync(ringer);
                    
                 }

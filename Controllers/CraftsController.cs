@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AAF.Data;
 using AAF.Data.Entities;
+using AAF.Helpers;
 
 namespace AAF.Controllers
 {
     public class CraftsController : Controller
     {
-        public ICraftRepository CraftRepository { get; }
+        private readonly ICraftRepository CraftRepository;
+        private readonly IUserHelper userHelper;
 
-        public CraftsController(ICraftRepository CraftRepository)
+        public CraftsController(ICraftRepository CraftRepository, IUserHelper userHelper)
         {
             this.CraftRepository = CraftRepository;
+            this.userHelper = userHelper;
         }
 
         // GET: Crafts
@@ -57,6 +60,8 @@ namespace AAF.Controllers
         {
             if (ModelState.IsValid)
             {
+                //TODO: Change For the Logged User
+                craft.User = await this.userHelper.GetUserByEmailAsync("irma.mendonca.sr@gmail.com");
                 await this.CraftRepository.CreateAsync(craft);
                 return RedirectToAction(nameof(Index));
             }
@@ -91,6 +96,8 @@ namespace AAF.Controllers
             {
                 try
                 {
+                    //TODO: Change For the Logged User
+                    craft.User = await this.userHelper.GetUserByEmailAsync("irma.mendonca.sr@gmail.com");
                     await this.CraftRepository.UpdateAsync(craft);
                 }
                 catch (DbUpdateConcurrencyException)

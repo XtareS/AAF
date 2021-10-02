@@ -1,4 +1,5 @@
 ﻿using AAF.Data.Entities;
+using AAF.Helpers;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Linq;
@@ -9,32 +10,34 @@ namespace AAF.Data
     public class SeedDb
     {
         private readonly DataContext context;
-        private readonly UserManager<User> usermanager;
-        private Random random;
 
-        public SeedDb(DataContext context, UserManager<User> usermanager)
+        private readonly IUserHelper userHelper;
+      
+        private readonly Random random;
+
+        public SeedDb(DataContext context, IUserHelper userHelper)
         {
             this.context = context;
-            this.usermanager = usermanager;
+            this.userHelper = userHelper;
             this.random = new Random();
         }
         public async Task SeedAsync()
         {
             await this.context.Database.EnsureCreatedAsync();
 
-            var user = await this.usermanager.FindByEmailAsync("irma.mendonca.sr@gmail.pt");
+            var user = await this.userHelper.GetUserByEmailAsync("irma.mendonca.sr@gmail.com");
             if (user == null)
             {
                 user = new User
                 {
                     FirstName = "Sara",
                     LastName = "Roque",
-                    Email = "irma.mendonca.sr@gmail.pt",
-                    UserName = "irma.mendonca.sr@gmail.pt",
+                    Email = "irma.mendonca.sr@gmail.com",
+                    UserName = "irma.mendonca.sr@gmail.com",
                     PhoneNumber = "967315706"
                 };
 
-                var rslt = await this.usermanager.CreateAsync(user, "01122010");
+                var rslt = await this.userHelper.AddUserAsync(user, "01122010");
                 if (rslt != IdentityResult.Success)
                 {
                     throw new InvalidOperationException("Ops! ocorreu um problema com a conta no Seed");

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using AAF.Data.Entities;
 using Microsoft.AspNetCore.Identity;
+using AAF.Helpers;
 
 namespace AAF
 {
@@ -46,6 +47,7 @@ namespace AAF
             services.AddScoped<ITexteiRepository, TexteiRepository>();
             services.AddScoped<ICraftRepository , CraftRepository >();
             services.AddScoped<IRingerRepository, RingerRepository>();
+            services.AddScoped<IUserHelper,UserHelper>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
