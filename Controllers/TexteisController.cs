@@ -67,27 +67,34 @@ namespace AAF.Controllers
 
                 if (view.ImageFileFront !=null && view.ImageFileFront.Length>0)
                 {
+                    var guidfront = Guid.NewGuid().ToString();
+                    var fileFront = $"{guidfront}.jpg";
+                    
+
                     pathFront = Path.Combine(Directory.GetCurrentDirectory(),
                         "wwwroot\\images\\Texteis\\front",
-                        view.ImageFileFront.FileName);
+                        fileFront);
                     using (var stream = new FileStream(pathFront, FileMode.Create))
                     {
                         await view.ImageFileFront.CopyToAsync(stream);
                     }
-                    pathFront = $"~/images/Texteis/front/{view.ImageFileFront.FileName}";
+                    pathFront = $"~/images/Texteis/front/{fileFront}";
                 }
 
 
                 if (view.ImageFileBack != null && view.ImageFileBack.Length > 0)
                 {
+                    var guidback = Guid.NewGuid().ToString();
+                    var fileback = $"{guidback}.jpg";
+
                     pathBack = Path.Combine(Directory.GetCurrentDirectory(),
                         "wwwroot\\images\\Texteis\\back",
-                        view.ImageFileBack.FileName);
+                       fileback);
                     using (var stream = new FileStream(pathBack, FileMode.Create))
                     {
                         await view.ImageFileBack.CopyToAsync(stream);
                     }
-                    pathBack = $"~/images/Texteis/back/{view.ImageFileBack.FileName}";
+                    pathBack = $"~/images/Texteis/back/{fileback}";
                 }
 
                 var textei = this.ToTextei(view, pathFront, pathBack);

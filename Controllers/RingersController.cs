@@ -67,27 +67,33 @@ namespace AAF.Controllers
 
                 if (view.ImageFileFront != null && view.ImageFileFront.Length > 0)
                 {
+                    var guidfront = Guid.NewGuid().ToString();
+                    var fileFront = $"{guidfront}.jpg";
+
                     pathFront = Path.Combine(Directory.GetCurrentDirectory(),
                         "wwwroot\\images\\Ringers\\front",
-                        view.ImageFileFront.FileName);
+                       fileFront);
                     using (var stream = new FileStream(pathFront, FileMode.Create))
                     {
                         await view.ImageFileFront.CopyToAsync(stream);
                     }
-                    pathFront = $"~/images/Ringers/front/{view.ImageFileFront.FileName}";
+                    pathFront = $"~/images/Ringers/front/{fileFront}";
                 }
 
 
                 if (view.ImageFileBack != null && view.ImageFileBack.Length > 0)
                 {
+                    var guidback = Guid.NewGuid().ToString();
+                    var fileback = $"{guidback}.jpg";
+
                     pathBack = Path.Combine(Directory.GetCurrentDirectory(),
                         "wwwroot\\images\\Ringers\\back",
-                        view.ImageFileBack.FileName);
+                        fileback);
                     using (var stream = new FileStream(pathBack, FileMode.Create))
                     {
                         await view.ImageFileBack.CopyToAsync(stream);
                     }
-                    pathBack = $"~/images/Ringers/back/{view.ImageFileBack.FileName}";
+                    pathBack = $"~/images/Ringers/back/{fileback}";
                 }
 
                 var ringer = this.ToRinger(view, pathFront, pathBack);
