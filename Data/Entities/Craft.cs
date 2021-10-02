@@ -24,5 +24,7 @@ namespace AAF.Data.Entities
         [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = false)]
         public double Stock { get; set; }
 
+        public User User { get; set; }
+
         }
 }
