@@ -27,7 +27,7 @@ namespace AAF.Controllers
         // GET: Ringers
         public IActionResult Index()
         {
-            return View(this.RingerRepository.GetAll());
+            return View(this.RingerRepository.GetAll().OrderByDescending(p => p.Id).ToList());
         }
 
         // GET: Ringers/Details/5

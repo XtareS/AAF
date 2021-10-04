@@ -9,9 +9,10 @@
 
 <div class="container card-holder d-flex m-auto row">
 
-
+   
     @foreach (var item in Model)
     {
+       
         <div class="card   ">
             <div class="card-title text-center">
                 <br />
@@ -31,7 +32,7 @@
                         }
                     </div>
 
-                    <div class="card-back">
+                    <div class=" card-back">
                         @if (!string.IsNullOrEmpty(item.ImageBack))
                         {
                             <img src="@Url.Content(item.ImageBack)" alt="image" />
@@ -43,7 +44,7 @@
             </div>
 
 
-            <div class="text-center">
+            <div class=" artic-price text-center">
 
                 <h2>
                     @Html.DisplayFor(modelItem => item.Price)
@@ -60,7 +61,7 @@
                 </div>
 
             </div>
-
+            <br>
             <div class="row mt-2 mb-3">
                 <a class=" text-center text-dark">@Html.DisplayFor(modelItem => item.Disponivel)</a>
                 <a class="btn btn-warning text-center text-dark ml-1" asp-action="Edit" asp-route-id="@item.Id">Edit</a>

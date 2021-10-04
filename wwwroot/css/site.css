@@ -144,6 +144,18 @@ ul {
     font-size: 20pt;
 }
 
+.card:hover >.artic-price{
+    opacity: 1;
+   
+}
+
+.artic-price{
+    opacity: 0;
+   
+    transition:0.3s linear 0.5s;
+
+}
+
 .card-footer,
 .modal-button {
     background: var(--Bg-frst-color);

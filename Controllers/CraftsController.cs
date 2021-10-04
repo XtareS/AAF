@@ -27,7 +27,7 @@ namespace AAF.Controllers
         // GET: Crafts
         public IActionResult Index()
         {
-            return View(this.CraftRepository.GetAll());
+            return View(this.CraftRepository.GetAll().OrderByDescending(p => p.Id).ToList());
         }
 
         // GET: Crafts/Details/5

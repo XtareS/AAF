@@ -27,7 +27,8 @@ namespace AAF.Controllers
         // GET: Texteis
         public IActionResult Index()
         {
-            return View(this.repository.GetAll());
+            
+            return View(this.repository.GetAll().OrderByDescending(p => p.Id).ToList());
         }
 
         // GET: Texteis/Details/5
@@ -39,6 +40,7 @@ namespace AAF.Controllers
             }
 
             var textei = await this.repository.GetByIdAsync(id.Value);
+                
             if (textei == null)
             {
                 return NotFound();
