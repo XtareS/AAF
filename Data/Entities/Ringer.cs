@@ -15,7 +15,7 @@ namespace AAF.Data.Entities
         [Display(Name = "imagem da frente")]
         public string ImageBack { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
+        [DisplayFormat(DataFormatString = "{0:C2}")]
         public decimal Price { get; set; }
 
         [Display(Name = "Disponível ?")]
@@ -25,7 +25,6 @@ namespace AAF.Data.Entities
         public double Stock { get; set; }
 
         public User User { get; set; }
-
 
     }
 }

@@ -1,0 +1,77 @@
+﻿@model AAF.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<br />
+<br />
+<br />
+
+<h2> Entrar ou Registar a Conta</h2>
+
+<br />
+<br />
+
+
+<div class="container m-auto ">
+    <div class="row">
+        <div class=" mt-3 col-12">
+            <div class="col-12">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly"></div>
+
+                    <div class="row form-group">
+
+                        <label asp-for="Username" class=" btn modal-button control-label text-warning col-4"></label>
+                        <input asp-for="Username" class=" col-8 form-control" />
+                        <span asp-validation-for="Username" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="row form-group">
+
+                        <label asp-for="Password" class=" btn modal-button control-label text-warning col-4"></label>
+                        <input asp-for="Password" class=" col-8 form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+
+                    </div>
+                    <div class="row form-group form-check">
+
+                        <label asp-for="RememberMe" class=" btn modal-button control-label text-warning ml-n3 col-4 ">
+                            Lembrar de mim?
+                            <input asp-validation-for="RememberMe" type="checkbox" class="col-4 form-check-input" asp-for="RememberMe" />
+                        </label>
+
+                    </div>
+
+
+
+                    <div class="row col-12 form-group">
+
+
+                        <div class=" btn m-auto modal-button form-group col-5 ">
+
+                            <input type="submit" value="Entrar" class="nav-link btn text-uppercase " />
+
+                            <br>
+
+                        </div>
+
+                        <div class="btn modal-button m-auto col-5 ">
+
+                            <a asp-action="Register" class=" nav-link btn  text-uppercase text-primary ">Novo registo</a>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

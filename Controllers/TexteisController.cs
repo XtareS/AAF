@@ -10,6 +10,7 @@ using AAF.Data.Entities;
 using AAF.Helpers;
 using AAF.Models;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AAF.Controllers
 {
@@ -49,12 +50,14 @@ namespace AAF.Controllers
             return View(textei);
         }
 
+        [Authorize]
         // GET: Texteis/Create
         public IActionResult Create()
         {
             return View();
         }
 
+        [Authorize]
         // POST: Texteis/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -126,6 +129,7 @@ namespace AAF.Controllers
             };
         }
 
+        [Authorize]
         // GET: Texteis/Edit/5
         public async Task <IActionResult> Edit(int? id)
         {
@@ -162,6 +166,7 @@ namespace AAF.Controllers
             };
         }
 
+        [Authorize]
         // POST: Texteis/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -195,6 +200,7 @@ namespace AAF.Controllers
             return View(textei);
         }
 
+        [Authorize]
         // GET: Texteis/Delete/5
         public async Task <IActionResult> Delete(int? id)
         {
@@ -213,6 +219,7 @@ namespace AAF.Controllers
             return View(textei);
         }
 
+        [Authorize]
         // POST: Texteis/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

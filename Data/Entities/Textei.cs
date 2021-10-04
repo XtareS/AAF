@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AAF.Data.Entities
 {
-    public class Textei:IEntity
+    public class Textei : IEntity
     {
         public int Id { get; set; }
 
@@ -15,7 +15,7 @@ namespace AAF.Data.Entities
         [Display(Name = "imagem da frente")]
         public string ImageBack { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
+        [DisplayFormat(DataFormatString = "{0:C2}")]
         public decimal Price { get; set; }
 
         [Display(Name = "Disponível ?")]

@@ -58,11 +58,31 @@
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav text-center  m-auto  mt-2 mt-lg-0">
 
-                <li class="nav-item ">
-                    <a class="nav-link" data-toggle="modal" data-target="#login" data-text="Login/Signup" href="#">Registar / Entrar </a>
-                </li>
+                <li class="nav-item  ">
 
-            </ul>
+
+                    @if (this.User.Identity.IsAuthenticated)
+                    {
+
+                    <span>
+                        <a class="nav-link" asp-controller="Account" asp-action="ChangeUser">@this.User.Identity.Name</a>
+                    </span>
+
+
+                    <span>
+                        <a class="nav-link" asp-controller="Account" asp-action="Logout">Sair</a>
+                    </span>
+
+                }
+
+                else
+                {
+                    <a class="nav-link" data-text="Entrar" asp-controller="Account" asp-action="Login"> Entrar </a>
+                }
+
+                    </li>
+
+                </ul>
         </div>
         <div class=" text-center ">
             <span class="nav-link" data-text="Copyright ©">
@@ -206,6 +226,7 @@
             </div>
         </div>
     </div>
+
     <div class="modal fade" id="UrMission" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -241,91 +262,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="login" role="dialog">
-        <div class="modal-dialog modal-md">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Login</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">
-                                <i class="fa fa-envelope"></i>
-                            </span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">
-                                <i class="fa fa-lock"></i>
-                            </span>
-                        </div>
-                        <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
-                    </div>
-                    <button type="submit" name="commit" class="modal-button btn  btn-lg btn-block">
-                        <span data-text="Entrar no website" class="nav-link">Login <i class="fa fa-sign-in"></i></span>
-                    </button>
-                    <div class="text-center modal-button">
-                        <a data-text="Criar a minha conta" class="nav-link" data-dismiss="modal" data-toggle="modal" data-target="#signup">Signup</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="signup" role="dialog">
-        <div class="modal-dialog modal-md">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Signup</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">
-                                <i class="fa fa-user"></i>
-                            </span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">
-                                <i class="fa fa-envelope"></i>
-                            </span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">
-                                <i class="fa fa-lock"></i>
-                            </span>
-                        </div>
-                        <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">
-                                <i class="fa fa-lock"></i>
-                            </span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Password confirmation" aria-label="Password confirmation" aria-describedby="basic-addon1">
-                    </div>
-                    <button type="submit" name="commit" class="btn modal-button btn-lg btn-block">
-                        <span data-text="Criar a minha conta" class="nav-link">Signup <i class="fa fa-sign-in"></i></span>
-                    </button>
-                    <div class="text-center modal-button">
-                        <a data-text="Entrar no website" class="nav-link" data-dismiss="modal" data-toggle="modal" data-target="#login">Login</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+  
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
