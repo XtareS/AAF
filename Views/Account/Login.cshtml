@@ -32,7 +32,7 @@
                     <div class="row form-group">
 
                         <label asp-for="Password" class=" btn modal-button control-label text-warning col-4"></label>
-                        <input asp-for="Password" class=" col-8 form-control" />
+                        <input asp-for="Password" type="password" class=" col-8 form-control" />
                         <span asp-validation-for="Password" class="text-danger"></span>
 
                     </div>
@@ -75,3 +75,10 @@
     </div>
 
 </div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}

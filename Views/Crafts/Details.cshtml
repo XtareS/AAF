@@ -112,14 +112,14 @@
 
 
                 </div>
-                </div>
+            </div>
         </div>
 
         <div class="row  mt-2 mb-3">
             <div class="btn modal-button m-auto col-6 ">
                 <a class="nav-link text-warning" data-text="Editar o artigo" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
             </div>
-           
+
             <div class="btn modal-button m-auto col-6 ">
                 <a class="nav-link" data-text="Voltar à lista" asp-action="Index">Voltar à Montra</a>
             </div>
@@ -128,3 +128,9 @@
 
     </div>
 </div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}

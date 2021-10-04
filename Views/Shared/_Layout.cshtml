@@ -22,7 +22,7 @@
             </a>
             <div class="collapse navbar-collapse" id="collapsibleNavId">
                 <ul class="navbar-nav m-auto text-center mt-2 mt-lg-0">
-                    <li id="AB" class="nav-item ">
+                    <li id="AB" class="nav-item">
                         <a class="nav-link" data-text="Sobre nós" asp-controller="Home" asp-action="AboutUs">AAF  </a>
                     </li>
                     <li id="CL" class="nav-item  ">
@@ -34,11 +34,22 @@
                     <li id="RG" class="nav-item ">
                         <a class="nav-link" data-text="Ver o dispositor" asp-controller="Ringers" asp-action="Index">Acessórios </a>
                     </li>
-                    <li id="Gt" class="nav-item ">
-                        <a class="nav-link" data-text="Criar Productos" asp-controller="Home" asp-action="Cloth">Gestor </a>
-                    </li>
+
+                    
+
+                    @if (this.User.Identity.IsAuthenticated)
+                    {
+                <li id="Gt" class="nav-item ">
+                    <a class="nav-link" data-text="Criar Productos" asp-controller="Home" asp-action="Cloth">Gestor </a>
+                </li>
+
+                    }
 
                 </ul>
+
+
+
+
             </div>
         </nav>
         <br>
@@ -64,23 +75,20 @@
                     @if (this.User.Identity.IsAuthenticated)
                     {
 
-                    <span>
                         <a class="nav-link" asp-controller="Account" asp-action="ChangeUser">@this.User.Identity.Name</a>
-                    </span>
 
 
-                    <span>
                         <a class="nav-link" asp-controller="Account" asp-action="Logout">Sair</a>
-                    </span>
 
-                }
 
-                else
-                {
-                    <a class="nav-link" data-text="Entrar" asp-controller="Account" asp-action="Login"> Entrar </a>
-                }
+                    }
 
-                    </li>
+                    else
+                    {
+                        <a class="nav-link" data-text="Entrar" asp-controller="Account" asp-action="Login"> Entrar </a>
+                    }
+
+                </li>
 
                 </ul>
         </div>
@@ -273,5 +281,6 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)
+  
 </body>
 </html>

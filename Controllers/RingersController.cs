@@ -104,8 +104,8 @@ namespace AAF.Controllers
                 var ringer = this.ToRinger(view, pathFront, pathBack);
 
 
-                //TODO: Change For the Logged User
-                ringer.User = await this.userHelper.GetUserByEmailAsync("irma.mendonca.sr@gmail.com");
+                
+                ringer.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                 await this.RingerRepository.CreateAsync(ringer);
                
                 return RedirectToAction(nameof(Index));
@@ -160,8 +160,8 @@ namespace AAF.Controllers
             {
                 try
                 {
-                    //TODO: Change For the Logged User
-                    ringer.User = await this.userHelper.GetUserByEmailAsync("irma.mendonca.sr@gmail.com");
+                    
+                    ringer.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                     await this.RingerRepository.UpdateAsync(ringer);
                    
                 }

@@ -60,7 +60,7 @@
                 </div>
 
             </div>
-<br>
+            <br>
             <div class="row mt-2 mb-3">
                 <a class=" text-center text-dark">@Html.DisplayFor(modelItem => item.Disponivel)</a>
                 <a class="btn btn-warning text-center text-dark ml-1" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
@@ -77,7 +77,9 @@
 
 
 
-@section Scripts{
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
     <script type="text/javascript">
         document.querySelector('#RG').className = 'active';
     </script>

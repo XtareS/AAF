@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using AAF.Data;
+﻿using AAF.Data;
 using AAF.Data.Entities;
 using AAF.Helpers;
 using AAF.Models;
-using System.IO;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace AAF.Controllers
 {
@@ -28,11 +26,12 @@ namespace AAF.Controllers
         // GET: Texteis
         public IActionResult Index()
         {
-            
+
             return View(this.repository.GetAll().OrderByDescending(p => p.Id).ToList());
         }
 
         // GET: Texteis/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -41,7 +40,7 @@ namespace AAF.Controllers
             }
 
             var textei = await this.repository.GetByIdAsync(id.Value);
-                
+
             if (textei == null)
             {
                 return NotFound();
@@ -50,17 +49,19 @@ namespace AAF.Controllers
             return View(textei);
         }
 
-        [Authorize]
+
         // GET: Texteis/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
-        [Authorize]
+
         // POST: Texteis/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,ImageFileFront,ImageFileBack,Price,Disponivel,Stock")] TexteiViewModel view)
@@ -70,11 +71,11 @@ namespace AAF.Controllers
                 var pathFront = string.Empty;
                 var pathBack = string.Empty;
 
-                if (view.ImageFileFront !=null && view.ImageFileFront.Length>0)
+                if (view.ImageFileFront != null && view.ImageFileFront.Length > 0)
                 {
                     var guidfront = Guid.NewGuid().ToString();
                     var fileFront = $"{guidfront}.jpg";
-                    
+
 
                     pathFront = Path.Combine(Directory.GetCurrentDirectory(),
                         "wwwroot\\images\\Texteis\\front",
@@ -104,9 +105,9 @@ namespace AAF.Controllers
 
                 var textei = this.ToTextei(view, pathFront, pathBack);
 
-                //TODO: Change For the Logged User
-                textei.User = await this.userHelper.GetUserByEmailAsync("irma.mendonca.sr@gmail.com");
-              await this.repository.CreateAsync(textei);
+                
+                textei.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
+                await this.repository.CreateAsync(textei);
                 return RedirectToAction(nameof(Index));
             }
             return View(view);
@@ -131,7 +132,7 @@ namespace AAF.Controllers
 
         [Authorize]
         // GET: Texteis/Edit/5
-        public async Task <IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -159,7 +160,7 @@ namespace AAF.Controllers
                 ImageFront = textei.ImageFront,
                 ImageBack = textei.ImageBack,
                 Price = textei.Price,
-                Disponivel= textei.Disponivel,
+                Disponivel = textei.Disponivel,
                 Stock = textei.Stock,
                 User = textei.User
 
@@ -174,15 +175,15 @@ namespace AAF.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ImageFront,ImageBack,Price,Disponivel,Stock")] Textei textei)
         {
-         
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    //TODO: Change For the Logged User
-                    textei.User = await this.userHelper.GetUserByEmailAsync("irma.mendonca.sr@gmail.com");
+                    
+                    textei.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                     await this.repository.UpdateAsync(textei);
-                   
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -202,7 +203,7 @@ namespace AAF.Controllers
 
         [Authorize]
         // GET: Texteis/Delete/5
-        public async Task <IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -227,8 +228,8 @@ namespace AAF.Controllers
         {
             var textei = await this.repository.GetByIdAsync(id);
             await this.repository.DeleteAsync(textei);
-           
-            return  RedirectToAction(nameof(Index));
+
+            return RedirectToAction(nameof(Index));
         }
 
     }

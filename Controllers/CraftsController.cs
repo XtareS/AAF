@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using AAF.Data;
+﻿using AAF.Data;
 using AAF.Data.Entities;
 using AAF.Helpers;
 using AAF.Models;
-using System.IO;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace AAF.Controllers
 {
@@ -32,6 +30,7 @@ namespace AAF.Controllers
         }
 
         // GET: Crafts/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -102,8 +101,8 @@ namespace AAF.Controllers
                 var craft = this.ToCraft(view, pathFront, pathBack);
 
 
-                //TODO: Change For the Logged User
-                craft.User = await this.userHelper.GetUserByEmailAsync("irma.mendonca.sr@gmail.com");
+                
+                craft.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                 await this.CraftRepository.CreateAsync(craft);
                 return RedirectToAction(nameof(Index));
             }
@@ -128,7 +127,7 @@ namespace AAF.Controllers
 
         // GET: Crafts/Edit/5
         [Authorize]
-        public async Task <IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -156,8 +155,8 @@ namespace AAF.Controllers
             {
                 try
                 {
-                    //TODO: Change For the Logged User
-                    craft.User = await this.userHelper.GetUserByEmailAsync("irma.mendonca.sr@gmail.com");
+                    
+                    craft.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                     await this.CraftRepository.UpdateAsync(craft);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -178,7 +177,7 @@ namespace AAF.Controllers
 
         // GET: Crafts/Delete/5
         [Authorize]
-        public async Task <IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
