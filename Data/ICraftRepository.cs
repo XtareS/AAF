@@ -8,5 +8,6 @@ namespace AAF.Data
 {
    public interface ICraftRepository : IGenericRepository<Craft>
     {
+        IQueryable GetAllWithUser();
     }
 }

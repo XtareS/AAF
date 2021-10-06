@@ -63,9 +63,17 @@
             <br>
             <div class="row mt-2 mb-3">
                 <a class=" text-center text-dark">@Html.DisplayFor(modelItem => item.Disponivel)</a>
-                <a class="btn btn-warning text-center text-dark ml-1" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                <a class="btn btn-info text-center text-dark ml-1 mr-1" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                <a class="btn btn-danger text-center text-dark mr-1" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @if (this.User.IsInRole("Admin"))
+                {
+
+                  
+                    <a class="btn btn-warning text-center text-dark ml-1" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+
+                    <a class="btn btn-info text-center text-dark ml-1 mr-1" asp-action="Details" asp-route-id="@item.Id">Details</a>
+
+                    <a class="btn btn-danger text-center text-dark mr-1" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                }
+
             </div>
 
         </div>

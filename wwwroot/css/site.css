@@ -26,6 +26,7 @@ ul {
     position: relative;
     display: flex;
     flex-direction: row;
+   
 }
 
 .nav-link, .modal-button input {
@@ -44,7 +45,7 @@ ul {
     .nav-link:hover {
         color: var(--Text-color-opacity);
         text-decoration: none;
-        transition-delay: 0.s;
+        transition-delay: 0.5s;
     }
 
     .nav-link::before,
@@ -256,7 +257,7 @@ ul {
 
         ul li {
             list-style: none;
-            width: 10vw;
+            width: 18vw;
             margin: 10px;
             overflow: hidden;
         }
@@ -268,7 +269,7 @@ ul {
         text-align: center;
         text-transform: uppercase;
         color: var(--Text-color);
-        font-size: 1em;
+        font-size: 1rem;
         font-weight: 700;
         transition: 0.5s;
     }
@@ -278,7 +279,7 @@ ul {
         .nav-link:hover {
             color: var(--Text-color-opacity);
             text-decoration: none;
-            transition-delay: 0.s;
+            transition-delay: 0.5s;
         }
 
         .nav-link::before {
@@ -370,7 +371,7 @@ ul {
         .nav-link:hover {
             color: var(--Text-color-opacity);
             text-decoration: none;
-            transition-delay: 0.s;
+            transition-delay: 0.5s;
         }
 
     .nav-link {

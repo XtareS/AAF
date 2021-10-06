@@ -8,6 +8,6 @@ namespace AAF.Data
 {
   public  interface IRingerRepository : IGenericRepository<Ringer>
     {
-    
+        IQueryable GetAllWithUser();
     }
 }

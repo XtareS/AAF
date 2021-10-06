@@ -8,6 +8,6 @@ namespace AAF.Data
 {
    public interface ITexteiRepository : IGenericRepository<Textei>
     {
-
+        IQueryable GetAllWithUser();
     }
 }

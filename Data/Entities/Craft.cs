@@ -26,5 +26,37 @@ namespace AAF.Data.Entities
 
         public User User { get; set; }
 
+        public string ImageFullPathFront
+        {
+            get
+            {
+
+                if (string.IsNullOrEmpty(this.ImageFront))
+
+                {
+                    return null;
+                }
+
+                return $"https://webSite{this.ImageFront.Substring(1)}";
+            }
+
+        }
+
+        public string ImageFullPathBack
+        {
+            get
+            {
+
+                if (string.IsNullOrEmpty(this.ImageBack))
+
+                {
+                    return null;
+                }
+
+                return $"https://webSite{this.ImageBack.Substring(1)}";
+            }
+
+        }
+
     }
 }
